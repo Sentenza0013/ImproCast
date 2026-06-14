@@ -83,6 +83,8 @@ function refreshAdmin() {
 }
 
 document.getElementById("plusRouge").addEventListener("click", () => changeNumber("scoreRouge", 1));
+document.getElementById("showTeams")
+    .addEventListener("click", () => triggerOverlay("teams"));
 document.getElementById("moinsRouge").addEventListener("click", () => changeNumber("scoreRouge", -1));
 document.getElementById("plusBleu").addEventListener("click", () => changeNumber("scoreBleu", 1));
 document.getElementById("moinsBleu").addEventListener("click", () => changeNumber("scoreBleu", -1));

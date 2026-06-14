@@ -147,13 +147,15 @@ function setOverlayContent(type) {
         intro: "ImproCast Arena",
         category: "CAT\u00c9GORIE",
         theme: "TH\u00c8ME",
-        timeup: "TIME UP !"
+        timeup: "TIME UP !",
+        teams: "VS",
     };
     const textMap = {
         intro: eventName,
         category,
         theme,
-        timeup: "Fin du chrono"
+        timeup: "Fin du chrono",
+        teams: `${readValue("nomEquipeRouge")} VS ${readValue("nomEquipeBleue")}`,
     };
 
     setText("overlayKicker", type === "intro" ? "Bienvenue dans l'ar\u00e8ne" : eventName);
@@ -183,6 +185,20 @@ function showOverlay(type) {
         playArenaTone("reveal");
         window.clearTimeout(showOverlay.timeout);
         showOverlay.timeout = window.setTimeout(() => showOverlay("none"), type === "intro" ? 6500 : 5200);
+    if (type === "teams") {
+
+    setText(
+        "overlayTitle",
+        `${readValue("nomEquipeRouge")}`
+    );
+
+    setText(
+        "overlayText",
+        `VS ${readValue("nomEquipeBleue")}`
+    );
+
+    return;
+}
     }
 }
 
