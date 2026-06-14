@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImproCast Arena - Affichage</title>
+    <link rel="stylesheet" href="./asset/css/improcast.css">
+</head>
+<body class="display-page">
+    <button id="pleinEcran" class="fullscreen-button" type="button">
+        Plein &eacute;cran
+    </button>
+
+    <main class="display-shell" aria-live="polite">
+        <header class="display-header">
+            <div class="brand-lockup">
+                <div id="logoBadge" class="logo-badge">IC</div>
+                <div>
+                    <p id="eventNameAff" class="eyebrow">Match d'improvisation</p>
+                    <h1>ImproCast Arena</h1>
+                </div>
+            </div>
+
+            <div class="arena-status">
+                <span>Live</span>
+                <strong>ARENA MODE</strong>
+            </div>
+        </header>
+
+        <section class="timer-stage" aria-label="Chronom&egrave;tre">
+            <p class="timer-label">Chrono</p>
+            <p id="chronoAff" class="timer">04:00</p>
+        </section>
+
+        <section class="scoreboard" aria-label="Tableau des scores">
+            <article class="team team-red">
+                <p class="team-label">&Eacute;quipe gauche</p>
+                <h2 id="nomRougeAff">Les Rouges</h2>
+                <p class="score" id="scoreRougeAff">0</p>
+                <p class="penalty" id="penaliteRougeAff">Fautes : 0</p>
+            </article>
+
+            <div class="versus-panel" aria-hidden="true">
+                <span>VS</span>
+            </div>
+
+            <article class="team team-blue">
+                <p class="team-label">&Eacute;quipe droite</p>
+                <h2 id="nomBleuAff">Les Bleus</h2>
+                <p class="score" id="scoreBleuAff">0</p>
+                <p class="penalty" id="penaliteBleuAff">Fautes : 0</p>
+            </article>
+        </section>
+
+        <section class="match-info" aria-label="Informations de l'improvisation">
+            <div class="info-block category-block">
+                <p class="info-label">Cat&eacute;gorie</p>
+                <p id="categorieAff" class="info-value">Libre</p>
+            </div>
+
+            <div class="info-block theme-block">
+                <p class="info-label">Th&egrave;me</p>
+                <p id="themeAff" class="info-value">Aucun th&egrave;me</p>
+            </div>
+        </section>
+    </main>
+
+    <section id="arenaOverlay" class="arena-overlay" aria-hidden="true">
+        <div class="overlay-logo" id="overlayLogo">IC</div>
+        <p id="overlayKicker" class="overlay-kicker">ImproCast Arena</p>
+        <h2 id="overlayTitle">ImproCast Arena</h2>
+        <p id="overlayText">Match d'improvisation</p>
+    </section>
+
+    <script src="./asset/js/affichage.js"></script>
+</body>
+</html>

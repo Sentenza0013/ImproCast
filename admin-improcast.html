@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImproCast Arena - Administration</title>
+    <link rel="stylesheet" href="./asset/css/admin-improcast.css">
+</head>
+<body>
+    <main class="admin-shell">
+        <header class="admin-header">
+            <div>
+                <p class="eyebrow">ImproCast Arena</p>
+                <h1>R&eacute;gie du match</h1>
+            </div>
+
+            <a class="display-link" href="./improcast.html" target="_blank" rel="noreferrer">
+                Ouvrir l'affichage
+            </a>
+        </header>
+
+        <section class="admin-grid" aria-label="R&eacute;glages du match">
+            <article class="panel wide-panel">
+                <h2>Identit&eacute; &eacute;v&eacute;nement</h2>
+
+                <label for="nomEvenement">Nom de l'&eacute;v&eacute;nement</label>
+                <input type="text" id="nomEvenement" placeholder="Finale ImproCast 2026">
+
+                <label for="logoTroupe">Logo de troupe</label>
+                <input type="text" id="logoTroupe" placeholder="URL ou chemin d'image, ex : ./asset/images/logo.png">
+
+                <label class="switch-line" for="sonsActifs">
+                    <input type="checkbox" id="sonsActifs">
+                    <span>Sons activ&eacute;s</span>
+                </label>
+            </article>
+
+            <article class="panel">
+                <h2>&Eacute;quipes</h2>
+
+                <label for="nomEquipeRouge">Nom &eacute;quipe gauche</label>
+                <input type="text" id="nomEquipeRouge" placeholder="Les Rouges">
+
+                <label for="nomEquipeBleue">Nom &eacute;quipe droite</label>
+                <input type="text" id="nomEquipeBleue" placeholder="Les Bleus">
+            </article>
+
+            <article class="panel">
+                <h2>Scores</h2>
+
+                <div class="score-control">
+                    <span>Rouge</span>
+                    <button id="moinsRouge" type="button">-</button>
+                    <strong id="scoreRouge">0</strong>
+                    <button id="plusRouge" type="button">+</button>
+                </div>
+
+                <div class="score-control">
+                    <span>Bleu</span>
+                    <button id="moinsBleu" type="button">-</button>
+                    <strong id="scoreBleu">0</strong>
+                    <button id="plusBleu" type="button">+</button>
+                </div>
+            </article>
+
+            <article class="panel">
+                <h2>P&eacute;nalit&eacute;s</h2>
+
+                <div class="score-control">
+                    <span>Rouge</span>
+                    <button id="moinsPenaliteRouge" type="button">-</button>
+                    <strong id="penaliteRouge">0</strong>
+                    <button id="plusPenaliteRouge" type="button">+</button>
+                </div>
+
+                <div class="score-control">
+                    <span>Bleu</span>
+                    <button id="moinsPenaliteBleu" type="button">-</button>
+                    <strong id="penaliteBleu">0</strong>
+                    <button id="plusPenaliteBleu" type="button">+</button>
+                </div>
+            </article>
+
+            <article class="panel">
+                <h2>Improvisation</h2>
+
+                <label for="categorie">Cat&eacute;gorie</label>
+                <select id="categorie">
+                    <option>Libre</option>
+                    <option>Chant&eacute;e</option>
+                    <option>Rim&eacute;e</option>
+                    <option>Sans paroles</option>
+                    <option>Doublage</option>
+                    <option>&Agrave; la mani&egrave;re de</option>
+                    <option>Compar&eacute;e</option>
+                    <option>Mixte</option>
+                </select>
+
+                <label for="theme">Th&egrave;me</label>
+                <input type="text" id="theme" placeholder="Entrez le th&egrave;me">
+            </article>
+
+            <article class="panel">
+                <h2>Chrono</h2>
+
+                <label for="dureeChrono">Dur&eacute;e en minutes</label>
+                <div class="inline-control">
+                    <input type="number" id="dureeChrono" value="4" min="1" max="60">
+                    <button id="appliquerDuree" type="button">Appliquer</button>
+                </div>
+
+                <div class="chrono-actions">
+                    <button id="startChrono" type="button">Start</button>
+                    <button id="pauseChrono" type="button">Pause</button>
+                    <button id="resetChrono" type="button">Reset</button>
+                </div>
+            </article>
+
+            <article class="panel wide-panel">
+                <h2>Diffusion Arena</h2>
+                <div class="show-actions">
+                    <button id="showIntro" type="button">Intro</button>
+                    <button id="showCategorie" type="button">Cat&eacute;gorie plein &eacute;cran</button>
+                    <button id="showTheme" type="button">Th&egrave;me plein &eacute;cran</button>
+                    <button id="hideOverlay" type="button">Retour match</button>
+                </div>
+            </article>
+
+            <article class="panel danger-panel">
+                <h2>Remise &agrave; z&eacute;ro</h2>
+                <p>Remet les scores, fautes, th&egrave;me, cat&eacute;gorie et chrono aux valeurs de d&eacute;part.</p>
+                <button id="resetMatch" type="button">R&eacute;initialiser le match</button>
+            </article>
+        </section>
+    </main>
+
+    <script src="./asset/js/admin-improcast.js"></script>
+</body>
+</html>
