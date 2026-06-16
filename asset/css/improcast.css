@@ -396,11 +396,11 @@ h1 {
 
 .arena-overlay p:last-child {
     align-self: center;
-    margin: clamp(180px, 23vw, 310px) 0 0;
+    margin: clamp(80px, 10vw, 120px) 0 0;
     max-width: min(1100px, 92vw);
     overflow-wrap: anywhere;
-    font-size: clamp(2rem, 6vw, 6.8rem);
-    line-height: 0.95;
+    font-size: clamp(2rem, 5vw, 5rem);
+    line-height: 1.1;
     text-transform: uppercase;
 }
 
@@ -678,4 +678,62 @@ h1 {
     .arena-overlay h2 { font-size: clamp(3.2rem, 18vw, 7rem); }
 
     .teams-showcase { flex-direction: column; gap: 24px; }
+}
+/* =====================================
+   THEMES ARENA
+===================================== */
+
+body.theme-hockey {
+    background:
+    radial-gradient(circle at center,
+    rgba(0,180,255,.20),
+    transparent 60%),
+    #00131d;
+}
+
+body.theme-football {
+    background:
+    radial-gradient(circle at center,
+    rgba(0,255,120,.18),
+    transparent 60%),
+    #03140a;
+}
+
+body.theme-neon {
+    background:
+    radial-gradient(circle at center,
+    rgba(255,0,255,.25),
+    transparent 60%),
+    #080012;
+}
+
+body.theme-future {
+    background:
+    radial-gradient(circle at center,
+    rgba(0,255,255,.25),
+    transparent 60%),
+    #020d14;
+}
+#overlayTitle{
+    margin-bottom:40px;
+}
+
+#overlayText{
+    margin-top:0 !important;
+    font-size:clamp(2rem,5vw,5rem);
+    line-height:1.1;
+}
+#overlayTitle{
+    z-index:10;
+}
+
+#overlayText{
+    position:absolute;
+    bottom:15%;
+    left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    text-align:center;
+    color:white;
+    z-index:20;
 }

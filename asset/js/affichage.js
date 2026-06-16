@@ -501,7 +501,7 @@ function mettreAJourAffichage() {
     updateAnimatedText("scoreRougeAff", current.scoreRouge, "score-pop");
     updateAnimatedText("scoreBleuAff",  current.scoreBleu,  "score-pop");
     setText("penaliteRougeAff", `🟥 ×${current.penaliteRouge}`);
-    setText("penaliteBleuAff",  `🟦 ×${current.penaliteBleu}`);
+    setText("penaliteBleuAff", `🟥 ×${current.penaliteBleu}`);
     setText("nomRougeAff", current.nomEquipeRouge);
     setText("nomBleuAff",  current.nomEquipeBleue);
     updateAnimatedText("categorieAff", current.categorie, "info-swipe");
@@ -524,7 +524,21 @@ function mettreAJourAffichage() {
         lastOverlayStamp = overlayStamp;
         showOverlay(readValue("arenaOverlay"));
     }
+const themeArena =
+    localStorage.getItem("themeArena") || "classic";
 
+document.body.classList.remove(
+    "theme-hockey",
+    "theme-football",
+    "theme-neon",
+    "theme-future"
+);
+
+if (themeArena !== "classic") {
+    document.body.classList.add(
+        "theme-" + themeArena
+    );
+}
     lastState = { ...current };
 }
 

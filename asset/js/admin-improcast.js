@@ -17,7 +17,6 @@ const defaults = {
     categorie: "Libre",
     theme: "",
     nomEvenement: "Match d'improvisation",
-    logoTroupe: "",
     sonsActifs: "false",
     dureeInitiale: 240,
     chronoRestant: 240,
@@ -28,6 +27,7 @@ const defaults = {
     derniereFauteBleue: "",
     historiqueRouge: "[]",
     historiqueBleu: "[]",
+    themeArena: "classic",
 };
 
 /* ============================================================
@@ -43,7 +43,6 @@ const elements = {
     categorie:      document.getElementById("categorie"),
     theme:          document.getElementById("theme"),
     nomEvenement:   document.getElementById("nomEvenement"),
-    logoTroupe:     document.getElementById("logoTroupe"),
     sonsActifs:     document.getElementById("sonsActifs"),
     dureeChrono:    document.getElementById("dureeChrono"),
 };
@@ -97,9 +96,10 @@ function refreshAdmin() {
     elements.categorie.value           = readString("categorie");
     elements.theme.value               = readString("theme");
     elements.nomEvenement.value        = readString("nomEvenement");
-    elements.logoTroupe.value          = readString("logoTroupe");
     elements.sonsActifs.checked        = readString("sonsActifs") === "true";
     elements.dureeChrono.value         = Math.max(1, readNumber("dureeInitiale") / 60);
+    document.getElementById("themeArena").value =
+    readString("themeArena");
 }
 
 /* ============================================================
@@ -130,8 +130,10 @@ document.getElementById("showThemeBtn").addEventListener("click", () => {
 });
 
 elements.nomEvenement.addEventListener("input", () => setStoredValue("nomEvenement", elements.nomEvenement.value));
-elements.logoTroupe.addEventListener("input",   () => setStoredValue("logoTroupe",   elements.logoTroupe.value));
 elements.sonsActifs.addEventListener("change",  () => setStoredValue("sonsActifs",   elements.sonsActifs.checked ? "true" : "false"));
+document.getElementById("themeArena").addEventListener("change", (e) => {
+    localStorage.setItem("themeArena", e.target.value);
+});
 
 /* ============================================================
    CHRONO
