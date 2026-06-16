@@ -290,6 +290,28 @@ function updateLogo(url) {
 ============================================================ */
 function afficherChrono() {
     const timer = getElement("chronoAff");
+    const chrono = getElement("chronoAff");
+
+chrono.classList.remove(
+    "chrono-warning",
+    "chrono-danger"
+);
+
+if (temps <= 30 && temps > 10) {
+
+    chrono.classList.add(
+        "chrono-warning"
+    );
+
+}
+
+if (temps <= 10) {
+
+    chrono.classList.add(
+        "chrono-danger"
+    );
+
+}
     const formatted = formatTime(temps);
     if (timer) {
         timer.textContent = formatted;
@@ -377,8 +399,30 @@ function setOverlayContent(type) {
     if (type === "whistle") {
         setText("overlayKicker", eventName);
         if (overlayTitle) { overlayTitle.style.display = "block"; overlayTitle.textContent = "⚡ ARRÊT DE JEU"; }
-        if (overlayText) { overlayText.style.display = "block"; overlayText.textContent = ""; }
-        return;
+if (overlayText) {
+
+    overlayText.style.display = "block";
+
+    if (type === "theme") {
+
+        overlayText.textContent = "...";
+
+        setTimeout(() => {
+
+            overlayText.textContent = theme;
+
+            overlayText.classList.remove("theme-reveal");
+            void overlayText.offsetWidth;
+            overlayText.classList.add("theme-reveal");
+
+        }, 700);
+
+    } else {
+
+        overlayText.textContent = textMap[type] || "";
+
+    }
+}        return;
     }
 
     // ------- PÉNALITÉ -------
@@ -386,9 +430,41 @@ function setOverlayContent(type) {
         setText("overlayKicker", localStorage.getItem("penaltyTeam") || "");
         if (overlayTitle) { overlayTitle.style.display = "block"; overlayTitle.textContent = "🟥 CARTON"; }
         if (overlayText) { overlayText.style.display = "block"; overlayText.textContent = localStorage.getItem("penaltyReason") || ""; }
+        replayAnimation(
+    getElement("arenaOverlay"),
+    "overlay-penalty"
+);
         return;
     }
+if (type === "theme") {
 
+    setText("overlayKicker", eventName);
+
+    if (overlayTitle) {
+        overlayTitle.style.display = "block";
+        overlayTitle.textContent = "THÈME";
+    }
+
+    if (overlayText) {
+
+        overlayText.style.display = "block";
+
+        overlayText.textContent = "";
+
+        setTimeout(() => {
+
+            overlayText.textContent = theme;
+
+            overlayText.classList.remove("theme-reveal");
+            void overlayText.offsetWidth;
+            overlayText.classList.add("theme-reveal");
+
+        }, 1200);
+
+    }
+
+    return;
+}
     // ------- CATÉGORIE / THÈME / TIME-UP -------
     const titleMap = {
         category: "CATÉGORIE",
@@ -498,8 +574,8 @@ function mettreAJourAffichage() {
         logoTroupe:     readValue("logoTroupe"),
     };
 
-    updateAnimatedText("scoreRougeAff", current.scoreRouge, "score-pop");
-    updateAnimatedText("scoreBleuAff",  current.scoreBleu,  "score-pop");
+    updateAnimatedText("scoreRougeAff", current.scoreRouge, "score-flash");
+updateAnimatedText("scoreBleuAff", current.scoreBleu, "score-flash");
     setText("penaliteRougeAff", `🟥 ×${current.penaliteRouge}`);
     setText("penaliteBleuAff", `🟥 ×${current.penaliteBleu}`);
     setText("nomRougeAff", current.nomEquipeRouge);

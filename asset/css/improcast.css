@@ -512,6 +512,12 @@ h1 {
     justify-content: center;
     gap: 16px;
     animation: endmatchEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,212,77,.12),
+        transparent 70%
+    );
 }
 
 .endmatch-trophy {
@@ -736,4 +742,208 @@ body.theme-future {
     text-align:center;
     color:white;
     z-index:20;
+}
+/* =====================================
+   SCORE FLASH
+===================================== */
+
+@keyframes scoreFlash {
+
+    0% {
+        transform: scale(1);
+        color: white;
+    }
+
+    25% {
+        transform: scale(1.35);
+        color: #ffd44d;
+        text-shadow:
+            0 0 10px #ffd44d,
+            0 0 25px #ffd44d,
+            0 0 45px #ffd44d;
+    }
+
+    100% {
+        transform: scale(1);
+        color: white;
+    }
+}
+
+.score-flash {
+    animation: scoreFlash 0.6s ease;
+}
+/* =====================================
+   CHRONO ARENA
+===================================== */
+
+.chrono-warning {
+    color: #ffb300 !important;
+    text-shadow:
+        0 0 10px #ffb300,
+        0 0 20px #ffb300;
+}
+
+@keyframes chronoDanger {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.chrono-danger {
+    color: #ff3030 !important;
+    text-shadow:
+        0 0 15px #ff3030,
+        0 0 30px #ff3030,
+        0 0 50px #ff3030;
+
+    animation: chronoDanger 0.8s infinite;
+}
+/* =====================================
+   PENALTY FLASH ARENA
+===================================== */
+
+@keyframes penaltyShake {
+
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-12px); }
+    40% { transform: translateX(12px); }
+    60% { transform: translateX(-8px); }
+    80% { transform: translateX(8px); }
+    100% { transform: translateX(0); }
+
+}
+
+@keyframes penaltyGlow {
+
+    0% {
+        box-shadow: inset 0 0 0 rgba(255,0,0,0);
+    }
+
+    50% {
+        box-shadow: inset 0 0 300px rgba(255,0,0,0.65);
+    }
+
+    100% {
+        box-shadow: inset 0 0 0 rgba(255,0,0,0);
+    }
+
+}
+
+.overlay-penalty {
+
+    animation:
+        penaltyShake 0.5s ease,
+        penaltyGlow 1s ease;
+
+}
+@keyframes themeReveal {
+
+    0%{
+    opacity:0;
+    transform:translateX(-50%) scale(0.2);
+}
+
+50%{
+    opacity:0.5;
+    transform:translateX(-50%) scale(1.2);
+}
+
+100%{
+    opacity:1;
+    transform:translateX(-50%) scale(1);
+}
+
+}
+
+.theme-reveal{
+
+    animation:themeReveal 1.8s ease;
+
+    color:#ffd44d;
+
+    text-shadow:
+        0 0 15px #ffd44d,
+        0 0 35px #ffd44d,
+        0 0 60px #ffd44d,
+        0 0 90px #ffd44d;
+}
+/* =====================================
+   ENDMATCH DELUXE
+===================================== */
+
+@keyframes trophyPulse {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+@keyframes winnerGlow {
+
+    0% {
+        text-shadow:
+            0 0 10px #ffd44d;
+    }
+
+    50% {
+        text-shadow:
+            0 0 25px #ffd44d,
+            0 0 50px #ffd44d,
+            0 0 90px #ffd44d;
+    }
+
+    100% {
+        text-shadow:
+            0 0 10px #ffd44d;
+    }
+
+}
+
+.endmatch-trophy {
+
+    animation:
+        trophyPulse 2s infinite;
+
+    filter:
+        drop-shadow(0 0 20px #ffd44d)
+        drop-shadow(0 0 40px #ffd44d);
+
+}
+
+.endmatch-winner {
+
+    animation:
+        winnerGlow 2s infinite;
+
+    color: #ffd44d;
+
+}
+
+.endmatch-scores {
+
+    font-size: clamp(3rem, 6vw, 6rem);
+
+    font-weight: 900;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,.4);
+
 }
