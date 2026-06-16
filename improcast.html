@@ -7,37 +7,43 @@
     <link rel="stylesheet" href="./asset/css/improcast.css">
 </head>
 <body class="display-page">
+
     <button id="pleinEcran" class="fullscreen-button" type="button">
-        Plein &eacute;cran
+        Plein écran
     </button>
 
     <main class="display-shell" aria-live="polite">
+
+        <!-- HEADER : brand-lockup + arena-status correctement fermés -->
         <header class="display-header">
             <div class="brand-lockup">
-                <div id="logoBadge" class="logo-badge">IC</div>
+                <img src="./asset/images/ImproCast-logo.png"
+                     alt="ImproCast Arena"
+                     class="logo-arena">
                 <div>
                     <p id="eventNameAff" class="eyebrow">Match d'improvisation</p>
                     <h1>ImproCast Arena</h1>
                 </div>
             </div>
-
             <div class="arena-status">
                 <span>Live</span>
                 <strong>ARENA MODE</strong>
             </div>
         </header>
 
-        <section class="timer-stage" aria-label="Chronom&egrave;tre">
+        <!-- CHRONO -->
+        <section class="timer-stage" aria-label="Chronomètre">
             <p class="timer-label">Chrono</p>
-            <p id="chronoAff" class="timer">04:00</p>
+            <time id="chronoAff" class="timer" datetime="PT4M">04:00</time>
         </section>
 
+        <!-- SCOREBOARD -->
         <section class="scoreboard" aria-label="Tableau des scores">
             <article class="team team-red">
-                <p class="team-label">&Eacute;quipe gauche</p>
+                <p class="team-label">Équipe gauche</p>
                 <h2 id="nomRougeAff">Les Rouges</h2>
                 <p class="score" id="scoreRougeAff">0</p>
-                <p class="penalty" id="penaliteRougeAff">Fautes : 0</p>
+                <p class="penalty" id="penaliteRougeAff">🟥 ×0</p>
             </article>
 
             <div class="versus-panel" aria-hidden="true">
@@ -45,31 +51,61 @@
             </div>
 
             <article class="team team-blue">
-                <p class="team-label">&Eacute;quipe droite</p>
+                <p class="team-label">Équipe droite</p>
                 <h2 id="nomBleuAff">Les Bleus</h2>
                 <p class="score" id="scoreBleuAff">0</p>
-                <p class="penalty" id="penaliteBleuAff">Fautes : 0</p>
+                <p class="penalty" id="penaliteBleuAff">🟦 ×0</p>
             </article>
         </section>
 
+        <!-- INFOS IMPROVISATION -->
         <section class="match-info" aria-label="Informations de l'improvisation">
             <div class="info-block category-block">
-                <p class="info-label">Cat&eacute;gorie</p>
+                <p class="info-label">Catégorie</p>
                 <p id="categorieAff" class="info-value">Libre</p>
             </div>
-
             <div class="info-block theme-block">
-                <p class="info-label">Th&egrave;me</p>
-                <p id="themeAff" class="info-value">Aucun th&egrave;me</p>
+                <p class="info-label">Thème</p>
+                <p id="themeAff" class="info-value">Aucun thème</p>
             </div>
         </section>
+
     </main>
 
-    <section id="arenaOverlay" class="arena-overlay" aria-hidden="true">
-        <div class="overlay-logo" id="overlayLogo">IC</div>
+    <!-- =============================================
+         OVERLAY UNIQUE — géré dynamiquement par JS
+         Modes : teams | intro | category | theme |
+                 timeup | penalty | whistle | endmatch
+    ============================================= -->
+    <section id="arenaOverlay" class="arena-overlay" aria-hidden="true" aria-live="assertive">
+
         <p id="overlayKicker" class="overlay-kicker">ImproCast Arena</p>
-        <h2 id="overlayTitle">ImproCast Arena</h2>
-        <p id="overlayText">Match d'improvisation</p>
+
+        <!-- Bloc équipes (présentation + intro) -->
+        <div class="teams-showcase" id="teamsShowcase">
+            <div id="teamLeft" class="team-showcase">Les Rouges</div>
+            <img id="overlayLogo"
+                 class="overlay-logo"
+                 src="./asset/images/improcast_arena_logo_officiel-removebg.png"
+                 alt="ImproCast Arena">
+            <div id="teamRight" class="team-showcase">Les Bleus</div>
+        </div>
+
+        <!-- Bloc titre / texte (catégorie, thème, time-up, pénalité, sifflet) -->
+        <h2 id="overlayTitle"></h2>
+        <p id="overlayText"></p>
+
+        <!-- =============================================
+             OVERLAY FIN DE MATCH (P1)
+             Bloc dédié — activé par classe overlay-endmatch
+        ============================================= -->
+        <div id="endmatchBlock" class="endmatch-block" style="display:none;">
+            <div class="endmatch-trophy">🏆</div>
+            <p class="endmatch-label">MATCH TERMINÉ</p>
+            <p class="endmatch-winner" id="endmatchWinner">LES ROUGES</p>
+            <div class="endmatch-scores" id="endmatchScores">0 – 0</div>
+        </div>
+
     </section>
 
     <script src="./asset/js/affichage.js"></script>

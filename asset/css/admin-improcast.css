@@ -1,3 +1,8 @@
+/* ============================================================
+   admin-improcast.css — ImproCast Arena — Régie
+   P1 : styles sifflet, fin de match, sauvegarde, historique matchs
+============================================================ */
+
 :root {
     --bg: #050914;
     --panel: #0e1728;
@@ -47,9 +52,7 @@ body {
     text-transform: uppercase;
 }
 
-h1,
-h2,
-p {
+h1, h2, p {
     margin-top: 0;
 }
 
@@ -67,6 +70,16 @@ h2 {
     text-transform: uppercase;
 }
 
+h3 {
+    margin: 14px 0 8px;
+    font-size: 1rem;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   BOUTONS
+============================================================ */
 .display-link,
 button {
     border: 0;
@@ -78,6 +91,7 @@ button {
     font-weight: 900;
     text-decoration: none;
     cursor: pointer;
+    transition: filter 0.15s;
 }
 
 button:hover,
@@ -85,6 +99,46 @@ button:hover,
     filter: brightness(1.08);
 }
 
+/* ✨ P1 : Bouton Sifflet */
+.btn-sifflet {
+    background: #00d4ff;
+    color: #001a24;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.btn-sifflet:hover {
+    filter: brightness(1.1);
+}
+
+.btn-sifflet.btn-flash {
+    animation: adminFlash 0.5s ease-out;
+}
+
+/* ✨ P1 : Bouton Fin de match */
+.btn-endmatch {
+    background: linear-gradient(135deg, #ffd44d, #ff8c00);
+    color: #07111f;
+    box-shadow: 0 0 24px rgba(255, 212, 77, 0.4);
+    font-size: 1rem;
+}
+
+/* Bouton secondaire (historique, fermer) */
+.btn-secondary {
+    color: var(--text) !important;
+    background: var(--panel-strong) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    box-shadow: none !important;
+}
+
+@keyframes adminFlash {
+    0%   { box-shadow: 0 0 0 rgba(0, 212, 255, 0); }
+    30%  { box-shadow: 0 0 40px 12px rgba(0, 212, 255, 0.7); filter: brightness(1.5); }
+    100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); filter: brightness(1); }
+}
+
+/* ============================================================
+   GRILLE
+============================================================ */
 .admin-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -105,6 +159,9 @@ button:hover,
     grid-column: 1 / -1;
 }
 
+/* ============================================================
+   FORMULAIRES
+============================================================ */
 label {
     display: block;
     margin: 16px 0 8px;
@@ -144,10 +201,13 @@ select:focus {
     accent-color: var(--gold);
 }
 
+/* ============================================================
+   CONTRÔLE SCORES
+============================================================ */
 .score-control {
-    display: grid;
-    grid-template-columns: minmax(80px, 1fr) 48px 70px 48px;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     margin-top: 16px;
 }
@@ -164,6 +224,9 @@ select:focus {
     font-size: 1.4rem;
 }
 
+/* ============================================================
+   CHRONO
+============================================================ */
 .inline-control {
     display: flex;
     gap: 10px;
@@ -181,21 +244,68 @@ select:focus {
     margin-top: 18px;
 }
 
-.chrono-actions button:nth-child(1) {
-    background: #41f28a;
-}
-
-.chrono-actions button:nth-child(2) {
-    background: var(--blue);
-}
-
-.chrono-actions button:nth-child(3),
-.show-actions button:last-child {
+.chrono-actions button:nth-child(1) { background: #41f28a; }
+.chrono-actions button:nth-child(2) { background: var(--blue); }
+.chrono-actions button:nth-child(3) {
     color: #fff;
     background: var(--panel-strong);
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+/* ============================================================
+   PÉNALITÉS
+============================================================ */
+.penalty-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+
+.penalty-counter strong {
+    color: var(--gold);
+    font-size: 2rem;
+}
+
+#ajouterFauteRouge,
+#ajouterFauteBleue {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#fauteRouge,
+#fauteBleue,
+#fauteRougeCustom,
+#fauteBleueCustom {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.historique-fautes {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.9rem;
+}
+
+.historique-fautes div {
+    margin: 4px 0;
+}
+
+#annulerFauteRouge,
+#annulerFauteBleue {
+    margin-top: 8px;
+    width: 100%;
+    background: #5a1a1a;
+    color: #fff;
+}
+
+/* ============================================================
+   PANEL DANGER
+============================================================ */
 .danger-panel {
     border-color: rgba(255, 45, 70, 0.46);
     background:
@@ -212,6 +322,116 @@ select:focus {
     background: var(--red);
 }
 
+/* ============================================================
+   ✨ P1 : PANEL SAUVEGARDE
+============================================================ */
+.save-panel {
+    border-color: rgba(255, 212, 77, 0.22);
+    background:
+        linear-gradient(135deg, rgba(255, 212, 77, 0.07), transparent 46%),
+        var(--panel);
+}
+
+.save-desc {
+    color: var(--muted);
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   ✨ P1 : HISTORIQUE DES MATCHS SAUVEGARDÉS
+============================================================ */
+.match-history {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.match-history h3 {
+    color: var(--gold);
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.liste-matchs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.liste-matchs::-webkit-scrollbar {
+    width: 4px;
+}
+.liste-matchs::-webkit-scrollbar-track {
+    background: var(--panel);
+}
+.liste-matchs::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+
+.match-record {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.match-record-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+
+.match-event {
+    font-weight: 700;
+    color: var(--gold);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 55%;
+}
+
+.match-record-scores {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.mr-rouge { color: var(--red); }
+.mr-bleu  { color: var(--blue); }
+.mr-sep   { color: var(--muted); }
+
+.match-record-meta {
+    font-size: 0.82rem;
+    color: var(--muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-delete-match {
+    align-self: flex-end;
+    padding: 5px 10px !important;
+    font-size: 0.78rem !important;
+    background: rgba(255, 45, 70, 0.18) !important;
+    color: var(--red) !important;
+    border: 1px solid rgba(255, 45, 70, 0.3) !important;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
 @media (max-width: 780px) {
     .admin-header,
     .inline-control {
@@ -223,7 +443,7 @@ select:focus {
         grid-template-columns: 1fr;
     }
 
-    .score-control {
-        grid-template-columns: minmax(70px, 1fr) 44px 56px 44px;
+    .show-actions {
+        flex-direction: column;
     }
 }

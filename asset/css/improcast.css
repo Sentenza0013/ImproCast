@@ -1,3 +1,8 @@
+/* ============================================================
+   improcast.css — ImproCast Arena — Affichage public
+   P1 : overlay fin de match, sifflet, corrections
+============================================================ */
+
 :root {
     --arena-black: #03050a;
     --panel: rgba(5, 10, 22, 0.78);
@@ -12,13 +17,15 @@
     box-sizing: border-box;
 }
 
-html {
+html,
+body {
+    width: 100%;
+    height: 100%;
     min-height: 100%;
-    background: var(--arena-black);
+    overflow: hidden;
 }
 
 body {
-    min-height: 100vh;
     margin: 0;
     color: var(--text);
     background:
@@ -53,9 +60,12 @@ body::after {
 }
 
 .display-page {
-    overflow: auto;
+    overflow: hidden;
 }
 
+/* ============================================================
+   BOUTON PLEIN ÉCRAN
+============================================================ */
 .fullscreen-button {
     position: fixed;
     top: 18px;
@@ -72,16 +82,23 @@ body::after {
     cursor: pointer;
 }
 
+/* ============================================================
+   SHELL PRINCIPAL
+============================================================ */
 .display-shell {
     position: relative;
     z-index: 1;
     display: grid;
-    min-height: 100vh;
-    grid-template-rows: auto minmax(170px, 0.42fr) minmax(330px, 1fr) auto;
-    gap: clamp(14px, 2vw, 26px);
-    padding: clamp(18px, 3vw, 44px);
+    height: 100vh;
+    box-sizing: border-box;
+    grid-template-rows: auto 13vh 1fr 14vh;
+    gap: 8px;
+    padding: 8px;
 }
 
+/* ============================================================
+   HEADER — bug fermeture div corrigé
+============================================================ */
 .display-header {
     display: flex;
     align-items: center;
@@ -95,23 +112,10 @@ body::after {
     gap: 16px;
 }
 
-.logo-badge,
-.overlay-logo {
-    display: grid;
-    width: clamp(56px, 7vw, 90px);
-    aspect-ratio: 1;
-    place-items: center;
-    border: 2px solid rgba(255, 212, 77, 0.72);
-    border-radius: 8px;
-    color: var(--gold);
-    background:
-        linear-gradient(135deg, rgba(255, 212, 77, 0.18), rgba(0, 167, 255, 0.12)),
-        rgba(0, 0, 0, 0.62);
-    background-position: center;
-    background-size: cover;
-    box-shadow: 0 0 30px rgba(255, 212, 77, 0.28);
-    font-size: clamp(1.4rem, 2.2vw, 2rem);
-    font-weight: 900;
+.logo-arena {
+    width: 200px;
+    height: auto;
+    object-fit: contain;
 }
 
 .eyebrow,
@@ -156,6 +160,9 @@ h1 {
     font: 900 1rem Arial, Helvetica, sans-serif;
 }
 
+/* ============================================================
+   CHRONO
+============================================================ */
 .timer-stage {
     position: relative;
     display: grid;
@@ -163,7 +170,7 @@ h1 {
     overflow: hidden;
     border: 1px solid rgba(255, 212, 77, 0.42);
     border-radius: 8px;
-    padding: clamp(14px, 2.2vw, 28px);
+    padding: 8px;
     background:
         linear-gradient(90deg, rgba(255, 45, 70, 0.17), transparent 35%, rgba(0, 167, 255, 0.18)),
         rgba(0, 0, 0, 0.66);
@@ -191,7 +198,7 @@ h1 {
     position: relative;
     margin: 0;
     color: #fff;
-    font-size: clamp(4rem, 12vw, 10rem);
+    font-size: clamp(3rem, 8vh, 7rem);
     font-weight: 900;
     line-height: 0.8;
     text-shadow:
@@ -206,6 +213,9 @@ h1 {
     text-shadow: 0 0 28px rgba(255, 45, 70, 0.9), 0 0 62px rgba(255, 45, 70, 0.58);
 }
 
+/* ============================================================
+   SCOREBOARD
+============================================================ */
 .scoreboard {
     display: grid;
     grid-template-columns: minmax(0, 1fr) clamp(70px, 9vw, 130px) minmax(0, 1fr);
@@ -225,7 +235,7 @@ h1 {
 .team {
     position: relative;
     display: flex;
-    min-height: 280px;
+    min-height: 0;
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
@@ -241,34 +251,24 @@ h1 {
     transform: skewX(-12deg) scaleX(1.2);
 }
 
-.team-red {
-    border-left: 8px solid var(--red);
-}
+.team-red { border-left: 8px solid var(--red); }
+.team-red::before { background: linear-gradient(135deg, rgba(255, 45, 70, 0.34), transparent 62%); }
 
-.team-red::before {
-    background: linear-gradient(135deg, rgba(255, 45, 70, 0.34), transparent 62%);
-}
-
-.team-blue {
-    border-right: 8px solid var(--blue);
-}
-
-.team-blue::before {
-    background: linear-gradient(225deg, rgba(0, 167, 255, 0.34), transparent 62%);
-}
+.team-blue { border-right: 8px solid var(--blue); }
+.team-blue::before { background: linear-gradient(225deg, rgba(0, 167, 255, 0.34), transparent 62%); }
 
 .team h2 {
     min-height: 1.7em;
     margin: 12px 0 4px;
     overflow-wrap: anywhere;
-    font-size: clamp(2.2rem, 4.7vw, 5rem);
+    font-size: clamp(1.5rem, 3vh, 3rem);
     line-height: 0.94;
     text-transform: uppercase;
 }
 
 .score {
     margin: 0;
-    font-size: clamp(8rem, 20vw, 21rem);
+    font-size: clamp(3rem, 10vh, 8rem);
     font-weight: 900;
     line-height: 0.78;
 }
@@ -278,11 +278,10 @@ h1 {
 }
 
 .penalty {
-    margin: 18px 0 0;
-    color: var(--gold);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: clamp(1.2rem, 2.2vw, 2.2rem);
-    font-weight: 900;
+    margin-top: 12px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
     text-transform: uppercase;
 }
 
@@ -302,6 +301,9 @@ h1 {
     text-shadow: 0 0 25px rgba(255, 212, 77, 0.54);
 }
 
+/* ============================================================
+   MATCH INFO
+============================================================ */
 .match-info {
     display: grid;
     grid-template-columns: minmax(190px, 0.65fr) minmax(0, 1.35fr);
@@ -310,15 +312,15 @@ h1 {
 }
 
 .info-block {
-    min-width: 0;
+    min-height: 90px;
 }
 
 .info-value {
     margin: 6px 0 0;
     overflow-wrap: anywhere;
-    font-size: clamp(1.8rem, 3.4vw, 4.2rem);
+    font-size: clamp(1.2rem, 2.5vh, 2.8rem);
     font-weight: 900;
-    line-height: 0.95;
+    line-height: 1.15;
     text-transform: uppercase;
 }
 
@@ -326,6 +328,9 @@ h1 {
     animation: infoSwipe 0.65s ease-out;
 }
 
+/* ============================================================
+   OVERLAY — base
+============================================================ */
 .arena-overlay {
     position: fixed;
     inset: 0;
@@ -348,6 +353,7 @@ h1 {
 .arena-overlay.is-visible {
     opacity: 1;
     transform: scale(1);
+    pointer-events: auto;
 }
 
 .arena-overlay > * {
@@ -355,17 +361,27 @@ h1 {
     grid-row: 1;
 }
 
+/* ============================================================
+   OVERLAY — éléments internes
+============================================================ */
 .overlay-logo {
     align-self: start;
     justify-self: center;
+    width: 220px;
+    height: auto;
+    margin-bottom: 30px;
 }
 
 .overlay-kicker {
     align-self: center;
-    margin: 0 0 clamp(180px, 22vw, 290px);
+    margin: -80px 0 clamp(120px, 15vw, 180px);
     color: var(--gold);
-    font: 900 clamp(1rem, 2vw, 2rem) Arial, Helvetica, sans-serif;
+    font: 900 clamp(2rem, 4vw, 4rem) Arial, Helvetica, sans-serif;
     text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow:
+        0 0 10px rgba(255, 212, 77, 0.5),
+        0 0 30px rgba(255, 212, 77, 0.3);
 }
 
 .arena-overlay h2 {
@@ -388,77 +404,242 @@ h1 {
     text-transform: uppercase;
 }
 
+/* ============================================================
+   OVERLAY INTRO
+============================================================ */
+.overlay-intro .overlay-logo {
+    width: 700px !important;
+    max-width: 90vw;
+    animation: arenaExplosion 1.2s ease-out;
+}
+
+.overlay-logo {
+    animation: arenaLogo 2s ease-in-out infinite alternate;
+}
+
+/* ============================================================
+   TEAMS SHOWCASE
+============================================================ */
+.teams-showcase {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 50px;
+}
+
+.team-showcase {
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+#teamLeft  { color: var(--red); }
+#teamRight { color: var(--blue); }
+
+/* ============================================================
+   OVERLAY PÉNALITÉ
+============================================================ */
+.overlay-penalty {
+    background:
+        radial-gradient(circle, rgba(180, 0, 0, 0.95) 0%, rgba(90, 0, 0, 0.98) 60%, rgba(30, 0, 0, 1) 100%);
+}
+
+.overlay-penalty #overlayTitle {
+    font-size: clamp(4rem, 8vw, 8rem);
+    color: #ff4040;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 50px rgba(255, 0, 0, 0.6);
+    animation: cartonImpact 0.4s ease-out, cartonShake 0.5s ease-in-out;
+}
+
+.overlay-penalty #overlayText {
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    animation: fadeUp 0.5s ease-out;
+}
+
+.overlay-penalty #overlayKicker {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    color: #ffffff;
+}
+
+/* ============================================================
+   OVERLAY TIME UP
+============================================================ */
 .overlay-timeup h2 {
     color: #fff;
     animation: dangerPulse 0.72s ease-in-out infinite;
 }
 
-.overlay-pulse h2 {
-    animation: overlayHit 0.7s ease-out;
+/* ============================================================
+   OVERLAY SIFFLET / ARRÊT DE JEU — P1
+============================================================ */
+.overlay-whistle {
+    background:
+        radial-gradient(circle at 50% 40%, rgba(255, 212, 77, 0.35), transparent 45%),
+        linear-gradient(135deg, rgba(5, 20, 40, 0.96), rgba(0, 0, 0, 0.98));
+}
+
+.overlay-whistle #overlayTitle {
+    font-size: clamp(5rem, 12vw, 12rem);
+    color: var(--gold);
+    text-shadow:
+        0 0 30px rgba(255, 212, 77, 0.8),
+        0 0 70px rgba(255, 212, 77, 0.4);
+    animation: whistleImpact 0.5s ease-out;
+    letter-spacing: 4px;
+}
+
+.overlay-whistle #overlayKicker {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ============================================================
+   OVERLAY FIN DE MATCH — P1
+============================================================ */
+.overlay-endmatch {
+    background:
+        radial-gradient(circle at 50% 30%, rgba(255, 212, 77, 0.45), transparent 50%),
+        linear-gradient(135deg, rgba(10, 10, 30, 0.97), rgba(5, 5, 15, 0.99));
+}
+
+/* Bloc central fin de match */
+.endmatch-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    animation: endmatchEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.endmatch-trophy {
+    font-size: clamp(5rem, 12vw, 10rem);
+    animation: trophyFloat 2.4s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 40px rgba(255, 212, 77, 0.7));
+}
+
+.endmatch-label {
+    font-size: clamp(1.5rem, 3vw, 3rem) !important;
+    font-weight: 900;
+    color: var(--gold) !important;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 212, 77, 0.5);
+    margin: 0 !important;
+}
+
+.endmatch-winner {
+    font-size: clamp(3rem, 8vw, 9rem) !important;
+    font-weight: 900;
+    line-height: 0.9 !important;
+    text-transform: uppercase;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.5), 0 0 80px rgba(255, 212, 77, 0.4);
+    margin: 0 !important;
+    animation: winnerPulse 1.4s ease-in-out infinite alternate;
+}
+
+.endmatch-scores {
+    font-size: clamp(2rem, 5vw, 5rem) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-weight: 900;
+    letter-spacing: 8px;
+    margin: 0 !important;
+}
+
+/* Couleurs vainqueur */
+.winner-rouge .endmatch-winner { color: var(--red); }
+.winner-bleu  .endmatch-winner { color: var(--blue); }
+.winner-egalite .endmatch-winner { color: var(--gold); }
+
+/* ============================================================
+   ANIMATIONS — sans doublons
+============================================================ */
+@keyframes arenaLogo {
+    from { transform: scale(1); }
+    to   { transform: scale(1.08); }
+}
+
+@keyframes arenaExplosion {
+    0%   { transform: scale(0); opacity: 0; filter: blur(25px); }
+    60%  { transform: scale(1.25); opacity: 1; filter: blur(0); }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes scorePop {
-    0% {
-        color: #fff;
-        filter: brightness(1.8);
-        text-shadow: 0 0 60px var(--gold);
-        transform: scale(1);
-    }
-    42% {
-        transform: scale(1.14);
-    }
-    100% {
-        transform: scale(1);
-    }
+    0%   { color: #fff; filter: brightness(1.8); text-shadow: 0 0 60px var(--gold); transform: scale(1); }
+    42%  { transform: scale(1.14); }
+    100% { transform: scale(1); }
 }
 
 @keyframes infoSwipe {
-    0% {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0%   { opacity: 0; transform: translateY(18px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes overlayHit {
-    0% {
-        letter-spacing: 0;
-        transform: scale(0.88);
-    }
-    55% {
-        transform: scale(1.06);
-    }
-    100% {
-        transform: scale(1);
-    }
+    0%   { letter-spacing: 0; transform: scale(0.88); }
+    55%  { transform: scale(1.06); }
+    100% { transform: scale(1); }
 }
 
 @keyframes lightSweep {
-    0% {
-        transform: translateX(-120%);
-    }
-    100% {
-        transform: translateX(120%);
-    }
+    0%   { transform: translateX(-120%); }
+    100% { transform: translateX(120%); }
 }
 
 @keyframes dangerPulse {
-    0%,
-    100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.04);
-    }
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.04); }
 }
 
+@keyframes cartonImpact {
+    0%   { transform: scale(0.2); opacity: 0; }
+    70%  { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes cartonShake {
+    0%, 100% { transform: translateX(0); }
+    20%       { transform: translateX(-12px); }
+    40%       { transform: translateX(12px); }
+    60%       { transform: translateX(-8px); }
+    80%       { transform: translateX(8px); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes whistleImpact {
+    0%   { transform: scale(0.3) rotate(-8deg); opacity: 0; }
+    60%  { transform: scale(1.12) rotate(2deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes endmatchEntrance {
+    0%   { transform: scale(0.5) translateY(60px); opacity: 0; }
+    70%  { transform: scale(1.05) translateY(-8px); opacity: 1; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes trophyFloat {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-14px); }
+}
+
+@keyframes winnerPulse {
+    from { text-shadow: 0 0 40px rgba(255, 255, 255, 0.5), 0 0 80px rgba(255, 212, 77, 0.4); }
+    to   { text-shadow: 0 0 60px rgba(255, 255, 255, 0.7), 0 0 120px rgba(255, 212, 77, 0.6); }
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
 @media (max-width: 960px) {
-    .display-page {
-        overflow: auto;
-    }
+    .display-page { overflow: auto; }
 
     .display-shell {
         grid-template-rows: auto auto auto auto;
@@ -469,26 +650,15 @@ h1 {
         flex-direction: column;
     }
 
-    .arena-status {
-        text-align: left;
-    }
+    .arena-status { text-align: left; }
 
     .scoreboard,
     .match-info {
         grid-template-columns: 1fr;
     }
 
-    .versus-panel {
-        min-height: 88px;
-    }
-
-    .versus-panel span {
-        transform: none;
-    }
-
-    .team {
-        min-height: 250px;
-    }
+    .versus-panel { min-height: 88px; }
+    .team { min-height: 250px; }
 }
 
 @media (max-width: 560px) {
@@ -497,23 +667,15 @@ h1 {
         margin: 12px 12px 0 auto;
     }
 
-    .display-shell {
-        padding: 16px 12px 24px;
-    }
+    .display-shell { padding: 16px 12px 24px; }
 
-    .brand-lockup {
-        align-items: flex-start;
-    }
+    .brand-lockup { align-items: flex-start; }
 
-    .timer {
-        font-size: clamp(4.8rem, 28vw, 8rem);
-    }
+    .timer { font-size: clamp(3rem, 8vw, 8rem); }
 
-    .score {
-        font-size: clamp(7rem, 34vw, 12rem);
-    }
+    .score { font-size: clamp(7rem, 34vw, 12rem); }
 
-    .arena-overlay h2 {
-        font-size: clamp(3.2rem, 18vw, 7rem);
-    }
+    .arena-overlay h2 { font-size: clamp(3.2rem, 18vw, 7rem); }
+
+    .teams-showcase { flex-direction: column; gap: 24px; }
 }
